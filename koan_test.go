@@ -17,7 +17,7 @@ func TestLogger_Info(t *testing.T) {
 	want := INFOCOLOR + "INFO: Test info message" + color.Reset
 
 	tl = createTestLogger()
-	got := captureOutput(func(){
+	got := captureOutput(func() {
 		tl.Info("Test info message")
 	})
 	assertEqual(t, got, want)
@@ -27,7 +27,7 @@ func TestLogger_Warn(t *testing.T) {
 	want := WARNCOLOR + "WARN: Test warning message" + color.Reset
 
 	tl = createTestLogger()
-	got := captureOutput(func(){
+	got := captureOutput(func() {
 		tl.Warn("Test warning message")
 	})
 	assertEqual(t, got, want)
@@ -39,7 +39,7 @@ func TestLogger_Error(t *testing.T) {
 	want := ERRCOLOR + msg + color.Reset
 
 	tl = createTestLogger()
-	got := captureOutput(func(){
+	got := captureOutput(func() {
 		tl.Error("Test message", err)
 	})
 	assertEqual(t, got, want)
