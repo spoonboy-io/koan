@@ -9,19 +9,23 @@ import (
 )
 
 // Logger will hold configuration specific to the logger package
-type Logger struct{}
+type Logger struct {
+	DEBUG bool
+}
 
 const (
 	INFOPREFIX     = "INFO"
 	WARNPREFIX     = "WARN"
 	ERRPREFIX      = "ERROR"
 	FATALERRPREFIX = "FATAL ERROR"
+	DEBUGPREFIX    = "DEBUG"
 )
 
 var (
-	INFOCOLOR = color.Gray
-	WARNCOLOR = color.Yellow
-	ERRCOLOR  = color.Red
+	INFOCOLOR  = color.Gray
+	WARNCOLOR  = color.Yellow
+	ERRCOLOR   = color.Red
+	DEBUGCOLOR = color.Green
 )
 
 // Info provides logging with an Info prefix
@@ -32,6 +36,13 @@ func (*Logger) Info(msg string) {
 // Warn provides logging with a Warning prefix
 func (*Logger) Warn(msg string) {
 	log.Println(write(WARNPREFIX, msg, WARNCOLOR))
+}
+
+// Debug provides additional logging if DEBUG is set on/true
+func (l *Logger) Debug(msg string) {
+	if l.DEBUG {
+		log.Println(write(DEBUGPREFIX, msg, DEBUGCOLOR))
+	}
 }
 
 // Error provides logging with an Error prefix

@@ -33,6 +33,16 @@ func TestLogger_Warn(t *testing.T) {
 	assertEqual(t, got, want)
 }
 
+func TestLogger_Debug(t *testing.T) {
+	want := DEBUGCOLOR + "DEBUG: Test debug message" + color.Reset
+	tl = createTestLogger()
+	tl.DEBUG = true
+	got := captureOutput(func() {
+		tl.Debug("Test debug message")
+	})
+	assertEqual(t, got, want)
+}
+
 func TestLogger_Error(t *testing.T) {
 	err := errors.New("test error message")
 	msg := fmt.Sprintf("%s (%v)", "ERROR: Test message", err)
